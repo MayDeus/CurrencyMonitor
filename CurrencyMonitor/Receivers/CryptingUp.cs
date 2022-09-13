@@ -1,4 +1,5 @@
 ﻿using CurrencyMonitor.Models.CryptingUp;
+using CurrencyMonitor.Models.CryptingUp.Assets;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,32 @@ namespace CurrencyMonitor.Receivers
 		private static Exchanges ParseExchanges(string jsonString)
 		{
 			return JsonConvert.DeserializeObject<Exchanges>(jsonString);
+		}
+
+		public static Assets ReceiveAssets()
+		{
+			WebClient wc = new WebClient();
+			wc.Encoding = Encoding.UTF8;
+
+			string data;
+
+			try
+			{
+				data = wc.DownloadString(ASSETS_URI);
+			}
+			catch (WebException)
+			{
+				// in case request has gone wrong
+				return null;
+			}
+
+			var result = ParseAssets(data);
+			return result;
+		}
+
+		private static Assets ParseAssets(string jsonString)
+		{
+			return JsonConvert.DeserializeObject<Assets>(jsonString);
 		}
 
 	}
