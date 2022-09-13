@@ -28,6 +28,7 @@ namespace CurrencyMonitor
 
 		private void buttonClick(object sender, RoutedEventArgs e)
 		{
+			CryptingUp.ReceiveAssets();
 			CryptingUp.ReceiveExchanges();
 		}
 	}

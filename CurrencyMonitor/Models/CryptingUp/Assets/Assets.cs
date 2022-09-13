@@ -9,7 +9,7 @@ namespace CurrencyMonitor.Models.CryptingUp.Assets
 	public class Assets
 	{
 		[JsonProperty("assets")]
-		public Assets[] Array { get; set; }
+		public Asset[] Array { get; set; }
 
 	}
 }
