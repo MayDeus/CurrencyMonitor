@@ -17,7 +17,7 @@ namespace CurrencyMonitor
     /// </summary>
     public partial class SpecificCoinPage : Window
     {
-        public SpecificCoinPage()
+        public SpecificCoinPage(string cryptoName)
         {
             InitializeComponent();
         }

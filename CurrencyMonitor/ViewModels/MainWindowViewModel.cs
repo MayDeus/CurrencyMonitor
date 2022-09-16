@@ -1,4 +1,5 @@
-﻿using CurrencyMonitor.Models.CryptingUp.Assets;
+﻿using CurrencyMonitor.Infrastructure.Commands;
+using CurrencyMonitor.Models.CryptingUp.Assets;
 using CurrencyMonitor.Receivers;
 using CurrencyMonitor.Stores;
 using CurrencyMonitor.ViewModels.Base;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CurrencyMonitor.ViewModels
 {
@@ -126,7 +128,36 @@ namespace CurrencyMonitor.ViewModels
             get => _cryptoCoin15;
             set => Set(ref _cryptoCoin15, value);
         }
-#endregion
+        #endregion
+
+        #region Commands
+
+        #region CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; }
+
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        #endregion
+
+        public ICommand OpenSpecificCryptoPageCommand { get; }
+
+        private void OnOpenSpecificCryptoPageCommandExecuted(object p)
+        {
+            string cryptoName = p.ToString();
+            SpecificCoinPage specificCoinPage = new SpecificCoinPage(cryptoName);
+            specificCoinPage.Show();
+            App.Current.Windows[0].Close();
+
+        }
+
+        private bool CanOpenSpecificCryptoPageCommandExecute(object p) => true;
+
+        #endregion
 
         public MainWindowViewModel()
         {
@@ -146,6 +177,12 @@ namespace CurrencyMonitor.ViewModels
             _cryptoCoin13 = CryptingUp.ReceiveAssets().Array[12].AssetName;
             _cryptoCoin14 = CryptingUp.ReceiveAssets().Array[13].AssetName;
             _cryptoCoin15 = CryptingUp.ReceiveAssets().Array[14].AssetName;
+            #endregion
+
+            #region Commands
+
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            OpenSpecificCryptoPageCommand = new LambdaCommand(OnOpenSpecificCryptoPageCommandExecuted, CanOpenSpecificCryptoPageCommandExecute);
             #endregion
         }
     }
