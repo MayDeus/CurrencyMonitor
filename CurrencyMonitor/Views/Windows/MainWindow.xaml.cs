@@ -24,6 +24,8 @@ namespace CurrencyMonitor
 		public MainWindow()
 		{
 			InitializeComponent();
+			CryptingUp.ReceiveAssets();
+			CryptingUp.ReceiveExchanges();
 		}
 
 		private void buttonClick(object sender, RoutedEventArgs e)

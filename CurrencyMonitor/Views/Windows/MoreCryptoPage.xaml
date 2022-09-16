@@ -18,6 +18,16 @@
         <ComboBox HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Width="120"/>
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top"/>
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" Margin="28 0 0 0" VerticalAlignment="Top"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <DataGrid x:Name="DataGridCoins" Margin="10,167,10,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Asset" Width="150"/>
+                <DataGridTextColumn Header="Price USD" Width="145"/>
+                <DataGridTextColumn Header="Change 1h" Width="145"/>
+                <DataGridTextColumn Header="Change 24h" Width="145"/>
+                <DataGridTextColumn Header="Change 7d" Width="145"/>
+                <DataGridTextColumn Header="Volume 24h" Width="145"/>
+                <DataGridTextColumn Header="Market Cap" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
