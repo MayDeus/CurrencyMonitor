@@ -5,6 +5,8 @@ using CurrencyMonitor.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace CurrencyMonitor.ViewModels
 {

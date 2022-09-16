@@ -24,8 +24,6 @@ namespace CurrencyMonitor
 		public MainWindow()
 		{
 			InitializeComponent();
-			CryptingUp.ReceiveAssets();
-			CryptingUp.ReceiveExchanges();
 		}
 
 		private void buttonClick(object sender, RoutedEventArgs e)
@@ -43,11 +41,11 @@ namespace CurrencyMonitor
 
         private void CryptoButtonClick(object sender, RoutedEventArgs e)
         {
-			if (!(sender is Button btn))
-				return;
-			SpecificCoinPage specificCoinPage = new SpecificCoinPage();
-			specificCoinPage.Show();
-			this.Hide();
-		}
+            if (!(sender is Button btn))
+                return;
+            SpecificCoinPage specificCoinPage = new SpecificCoinPage();
+            specificCoinPage.Show();
+            this.Hide();
+        }
     }
 }
