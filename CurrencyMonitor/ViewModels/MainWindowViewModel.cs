@@ -1,4 +1,5 @@
 ﻿using CurrencyMonitor.Infrastructure.Commands;
+using CurrencyMonitor.Models.Additional;
 using CurrencyMonitor.Models.CryptingUp.Assets;
 using CurrencyMonitor.Receivers;
 using CurrencyMonitor.Stores;
@@ -21,6 +22,17 @@ namespace CurrencyMonitor.ViewModels
             get => _Title;
             set => Set(ref _Title, value);
         }
+        #endregion
+
+        #region AssetArray
+
+        private Asset[] _assetsArray;
+        public Asset[] AssetsArray
+        {
+            get => _assetsArray;
+            set => Set(ref _assetsArray, value);
+        }
+
         #endregion
 
         #region TopCryptoCoinsDisplay
@@ -149,8 +161,8 @@ namespace CurrencyMonitor.ViewModels
 
         private void OnOpenSpecificCryptoPageCommandExecuted(object p)
         {
-            string cryptoName = p.ToString();
-            SpecificCoinPage specificCoinPage = new SpecificCoinPage(cryptoName);
+            SaveParameter.Parameter = p.ToString();
+            SpecificCoinPage specificCoinPage = new SpecificCoinPage();
             specificCoinPage.Show();
             App.Current.Windows[0].Close();
 
@@ -159,6 +171,7 @@ namespace CurrencyMonitor.ViewModels
 
         #endregion
 
+        #region OpenMoreCryptoPageCommand
         public ICommand OpenMoreCryptoPageCommand { get; }
 
         private void OnOpenMoreCryptoPageCommandExecuted(object p)
@@ -169,27 +182,30 @@ namespace CurrencyMonitor.ViewModels
 
         }
         private bool CanOpenMoreCryptoPageCommandExecute(object p) => true;
+        #endregion
 
         #endregion
 
         public MainWindowViewModel()
         {
+            _assetsArray = (CryptingUp.ReceiveAssets().Array);
+
             #region InitializeCryptoCoinButtons
-            _cryptoCoin1 = CryptingUp.ReceiveAssets().Array[0].AssetName;
-            _cryptoCoin2 = CryptingUp.ReceiveAssets().Array[1].AssetName;
-            _cryptoCoin3 = CryptingUp.ReceiveAssets().Array[2].AssetName;
-            _cryptoCoin4 = CryptingUp.ReceiveAssets().Array[3].AssetName;
-            _cryptoCoin5 = CryptingUp.ReceiveAssets().Array[4].AssetName;
-            _cryptoCoin6 = CryptingUp.ReceiveAssets().Array[5].AssetName;
-            _cryptoCoin7 = CryptingUp.ReceiveAssets().Array[6].AssetName;
-            _cryptoCoin8 = CryptingUp.ReceiveAssets().Array[7].AssetName;
-            _cryptoCoin9 = CryptingUp.ReceiveAssets().Array[8].AssetName;
-            _cryptoCoin10 = CryptingUp.ReceiveAssets().Array[9].AssetName;
-            _cryptoCoin11 = CryptingUp.ReceiveAssets().Array[10].AssetName;
-            _cryptoCoin12 = CryptingUp.ReceiveAssets().Array[11].AssetName;
-            _cryptoCoin13 = CryptingUp.ReceiveAssets().Array[12].AssetName;
-            _cryptoCoin14 = CryptingUp.ReceiveAssets().Array[13].AssetName;
-            _cryptoCoin15 = CryptingUp.ReceiveAssets().Array[14].AssetName;
+            _cryptoCoin1 = _assetsArray[0].AssetName;
+            _cryptoCoin2 = _assetsArray[1].AssetName;
+            _cryptoCoin3 = _assetsArray[2].AssetName;
+            _cryptoCoin4 = _assetsArray[3].AssetName;
+            _cryptoCoin5 = _assetsArray[4].AssetName;
+            _cryptoCoin6 = _assetsArray[5].AssetName;
+            _cryptoCoin7 = _assetsArray[6].AssetName;
+            _cryptoCoin8 = _assetsArray[7].AssetName;
+            _cryptoCoin9 = _assetsArray[8].AssetName;
+            _cryptoCoin10 = _assetsArray[9].AssetName;
+            _cryptoCoin11 = _assetsArray[10].AssetName;
+            _cryptoCoin12 = _assetsArray[11].AssetName;
+            _cryptoCoin13 = _assetsArray[12].AssetName;
+            _cryptoCoin14 = _assetsArray[13].AssetName;
+            _cryptoCoin15 = _assetsArray[15].AssetName;
             #endregion
 
             #region Commands

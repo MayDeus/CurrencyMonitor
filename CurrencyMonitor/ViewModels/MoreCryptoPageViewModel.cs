@@ -74,11 +74,12 @@ namespace CurrencyMonitor.ViewModels
                     continue;
             }
 
-
             #endregion
 
             #region Commands
 
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            
             #endregion
         }
     }
