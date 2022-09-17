@@ -142,7 +142,44 @@ namespace CurrencyMonitor.ViewModels
         }
         #endregion
 
+        #region SearchBarText
+        private string _searchBarText;
+        public string SearchBarText
+        {
+            get => _searchBarText;
+            set => Set(ref _searchBarText, value);
+        }
+        #endregion
+
         #region Commands
+
+        #region SearchButton
+        public ICommand SearchButtonCommand { get; }
+
+        private void OnSearchButtonCommandExecuted(object p)
+        {
+            if (!string.IsNullOrEmpty(_searchBarText))
+            {
+                for (int i = 0; i < _assetsArray.Length; i++)
+                {
+                    if (_assetsArray[i].AssetName == _searchBarText)
+                    {
+                        SaveParameters.Parameter = _searchBarText;
+                        SpecificCoinPage specificCoinPage = new SpecificCoinPage();
+                        specificCoinPage.Show();
+                        App.Current.Windows[0].Close();
+                    }
+                }
+                MessageBox.Show("Could not find the coin named: " + _searchBarText);
+            }
+            else
+                MessageBox.Show("Please enter any coin name");
+
+        }
+
+        private bool CanSearchButtonCommandExecute(object p) => true;
+
+        #endregion
 
         #region CloseApplicationCommand
         public ICommand CloseApplicationCommand { get; }
@@ -161,7 +198,7 @@ namespace CurrencyMonitor.ViewModels
 
         private void OnOpenSpecificCryptoPageCommandExecuted(object p)
         {
-            SaveParameter.Parameter = p.ToString();
+            SaveParameters.Parameter = p.ToString();
             SpecificCoinPage specificCoinPage = new SpecificCoinPage();
             specificCoinPage.Show();
             App.Current.Windows[0].Close();
@@ -209,7 +246,7 @@ namespace CurrencyMonitor.ViewModels
             #endregion
 
             #region Commands
-
+            SearchButtonCommand = new LambdaCommand(OnSearchButtonCommandExecuted, CanSearchButtonCommandExecute);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             OpenSpecificCryptoPageCommand = new LambdaCommand(OnOpenSpecificCryptoPageCommandExecuted, CanOpenSpecificCryptoPageCommandExecute);
             OpenMoreCryptoPageCommand = new LambdaCommand(OnOpenMoreCryptoPageCommandExecuted, CanOpenMoreCryptoPageCommandExecute);

@@ -36,7 +36,54 @@ namespace CurrencyMonitor.ViewModels
 
         #endregion
 
+        #region AssetArray
+
+        private Asset[] _assetsArray;
+        public Asset[] AssetsArray
+        {
+            get => _assetsArray;
+            set => Set(ref _assetsArray, value);
+        }
+        #endregion
+
+        #region SearchBarText
+        private string _searchBarText;
+        public string SearchBarText
+        {
+            get => _searchBarText;
+            set => Set(ref _searchBarText, value);
+        }
+        #endregion
+
         #region Commands
+
+        #region SearchButton
+        public ICommand SearchButtonCommand { get; }
+
+        private void OnSearchButtonCommandExecuted(object p)
+        {
+            if (!string.IsNullOrEmpty(_searchBarText))
+            {
+                for (int i = 0; i < _assetsArray.Length; i++)
+                {
+                    if (_assetsArray[i].AssetName == _searchBarText)
+                    {
+                        SaveParameters.Parameter = _searchBarText;
+                        SpecificCoinPage specificCoinPage = new SpecificCoinPage();
+                        specificCoinPage.Show();
+                        App.Current.Windows[0].Close();
+                    }
+                }
+                MessageBox.Show("Could not find the coin named: " + _searchBarText);
+            }
+            else
+                MessageBox.Show("Please enter any coin name");
+
+        }
+
+        private bool CanSearchButtonCommandExecute(object p) => true;
+
+        #endregion
 
         #region CloseApplicationCommand
         public ICommand CloseApplicationCommand { get; }
@@ -53,21 +100,22 @@ namespace CurrencyMonitor.ViewModels
 
         public MoreCryptoPageViewModel()
         {
+            _assetsArray = (CryptingUp.ReceiveAssets().Array);
+
             #region InitializeDataGrid
 
-            Asset[] _cryptoCoinAssets = (CryptingUp.ReceiveAssets().Array);
-            for (int i = 0; i < _cryptoCoinAssets.Length; i++)
+            for (int i = 0; i < _assetsArray.Length; i++)
             {
-                if (_cryptoCoinAssets[i].AssetName != String.Empty)
+                if (_assetsArray[i].AssetName != String.Empty)
                 {
                     DataGridAsset dataGridAsset = new DataGridAsset();
-                    dataGridAsset.AssetName = _cryptoCoinAssets[i].AssetName;
-                    dataGridAsset.Price = _cryptoCoinAssets[i].Price;
-                    dataGridAsset.Volume24h = _cryptoCoinAssets[i].Volume24h;
-                    dataGridAsset.Change1h = _cryptoCoinAssets[i].Change1h;
-                    dataGridAsset.Change24h = _cryptoCoinAssets[i].Change24h;
-                    dataGridAsset.Change7d = _cryptoCoinAssets[i].Change7d;
-                    dataGridAsset.MarketCap = _cryptoCoinAssets[i].MarketCap;
+                    dataGridAsset.AssetName = _assetsArray[i].AssetName;
+                    dataGridAsset.Price = _assetsArray[i].Price;
+                    dataGridAsset.Volume24h = _assetsArray[i].Volume24h;
+                    dataGridAsset.Change1h = _assetsArray[i].Change1h;
+                    dataGridAsset.Change24h = _assetsArray[i].Change24h;
+                    dataGridAsset.Change7d = _assetsArray[i].Change7d;
+                    dataGridAsset.MarketCap = _assetsArray[i].MarketCap;
                     _dataGridAssets.Add(dataGridAsset);
                 }
                 else
@@ -78,6 +126,7 @@ namespace CurrencyMonitor.ViewModels
 
             #region Commands
 
+            SearchButtonCommand = new LambdaCommand(OnSearchButtonCommandExecuted, CanSearchButtonCommandExecute);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             
             #endregion
