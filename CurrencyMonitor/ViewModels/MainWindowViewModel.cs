@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CurrencyMonitor.ViewModels
 {
-    internal class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
         #region Title
         private string _Title = "CurrencyMonitor";
@@ -144,6 +144,7 @@ namespace CurrencyMonitor.ViewModels
 
         #endregion
 
+        #region OpenSpecificCryptoPageCommand
         public ICommand OpenSpecificCryptoPageCommand { get; }
 
         private void OnOpenSpecificCryptoPageCommandExecuted(object p)
@@ -154,8 +155,20 @@ namespace CurrencyMonitor.ViewModels
             App.Current.Windows[0].Close();
 
         }
-
         private bool CanOpenSpecificCryptoPageCommandExecute(object p) => true;
+
+        #endregion
+
+        public ICommand OpenMoreCryptoPageCommand { get; }
+
+        private void OnOpenMoreCryptoPageCommandExecuted(object p)
+        {
+            MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
+            moreCryptoPage.Show();
+            App.Current.Windows[0].Close();
+
+        }
+        private bool CanOpenMoreCryptoPageCommandExecute(object p) => true;
 
         #endregion
 
@@ -183,6 +196,8 @@ namespace CurrencyMonitor.ViewModels
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             OpenSpecificCryptoPageCommand = new LambdaCommand(OnOpenSpecificCryptoPageCommandExecuted, CanOpenSpecificCryptoPageCommandExecute);
+            OpenMoreCryptoPageCommand = new LambdaCommand(OnOpenMoreCryptoPageCommandExecuted, CanOpenMoreCryptoPageCommandExecute);
+
             #endregion
         }
     }

@@ -26,22 +26,5 @@ namespace CurrencyMonitor
 		{
 			InitializeComponent();
 		}
-
-
-		private void LoadMoreClick(object sender, RoutedEventArgs e)
-        {
-			MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
-			moreCryptoPage.Show();
-			this.Hide();
-        }
-
-        //private void CryptoButtonClick(object sender, RoutedEventArgs e)
-        //{
-        //    if (!(sender is Button btn))
-        //        return;
-        //    SpecificCoinPage specificCoinPage = new SpecificCoinPage();
-        //    specificCoinPage.Show();
-        //    this.Hide();
-        //}
     }
 }

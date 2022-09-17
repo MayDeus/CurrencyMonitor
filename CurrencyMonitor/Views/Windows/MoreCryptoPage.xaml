@@ -1,11 +1,15 @@
-﻿<Window x:Class="CurrencyMonitor.MoreCryptoPage"
+﻿<Window x:Name="CryptoList" x:Class="CurrencyMonitor.MoreCryptoPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyMonitor"
+        xmlns:vm="clr-namespace:CurrencyMonitor.ViewModels"
         mc:Ignorable="d"
-        Title="MoreCryptoPage" Height="700" Width="1000" Cursor="Arrow" WindowStyle="ThreeDBorderWindow">
+        Title="{Binding Path=Title}" Height="700" Width="1000" Visibility="Visible" WindowStyle="ThreeDBorderWindow" Cursor="Arrow">
+    <Window.DataContext>
+        <vm:MoreCryptoPageViewModel/>
+    </Window.DataContext>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF39BE7B"/>
@@ -20,15 +24,23 @@
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top"/>
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" Margin="28 0 0 0" VerticalAlignment="Top"/>
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top" Margin="56 0 0 0"/>
-        <DataGrid x:Name="DataGridCoins" Margin="10,167,10,10">
+        <DataGrid x:Name="DataGridCoins" Margin="10,167,10,10" ItemsSource="{Binding Path=DataGridAssets}" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Asset" Width="150"/>
-                <DataGridTextColumn Header="Price USD" Width="145"/>
-                <DataGridTextColumn Header="Change 1h" Width="145"/>
-                <DataGridTextColumn Header="Change 24h" Width="145"/>
-                <DataGridTextColumn Header="Change 7d" Width="145"/>
-                <DataGridTextColumn Header="Volume 24h" Width="145"/>
-                <DataGridTextColumn Header="Market Cap" Width="*"/>
+                <DataGridTextColumn Width="*" Header="Asset" Binding="{Binding Path=AssetName}"/>
+                <DataGridTextColumn Width="*" Header="Price" Binding="{Binding Path=Price}"/>
+                <DataGridTextColumn Width="*" Header="Volume24h" Binding="{Binding Path=Volume24h}"/>
+                <DataGridTextColumn Width="*" Header="Change1h" Binding="{Binding Path=Change1h}"/>
+                <DataGridTextColumn Width="*" Header="Change24h" Binding="{Binding Path=Change24h}"/>
+                <DataGridTextColumn Width="*" Header="Change7d" Binding="{Binding Path=Change7d}"/>
+                <DataGridTextColumn Width="*" Header="Market Cup" Binding="{Binding Path=MarketCap}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
