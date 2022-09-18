@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Windows\search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Windows\search.png" />
   </ItemGroup>
 
 </Project>

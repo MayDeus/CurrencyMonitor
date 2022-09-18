@@ -222,20 +222,22 @@ namespace CurrencyMonitor.ViewModels
 
             if (Navigation.PreviousPageIDs[i - 2] == 0)
             {
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 App.Current.Windows[0].Close();
             }
             else if (Navigation.PreviousPageIDs[i - 2] == 1)
             {
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
                 moreCryptoPage.Show();
                 App.Current.Windows[0].Close();
             }
             else
             {
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 SaveParameters.Parameter = p.ToString();
-
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -254,7 +256,6 @@ namespace CurrencyMonitor.ViewModels
         private void OnGoNextButtonCommandExecuted(object p)
         {
             int nextPageIDsLength = Navigation.GoNextPageIDs.Count;
-            Navigation.PreviousPageIDs.Add(Navigation.GoNextPageIDs[nextPageIDsLength - 1]);
 
             if (Navigation.GoNextPageIDs[nextPageIDsLength - 1] == 0)
             {
@@ -335,21 +336,26 @@ namespace CurrencyMonitor.ViewModels
 
             if (Navigation.PreviousPageIDs.Count != 0)
                 GoBackButtonIsEnable = true;
+            _searchBarText = _cryptoName;
 
             if (Navigation.GoNextPageIDs.Count != 0)
                 GoNextButtonIsEnable = true;
 
-            if (_cryptoName == "back")
+            if (_cryptoName == "<-")
             {
+                Navigation.PreviousPageIDs.Add(PageID);
                 int i = Navigation.SpecificCoinPagePreviousParameters.Count;
                 _cryptoName = Navigation.SpecificCoinPagePreviousParameters[i - 1];
+                _searchBarText = _cryptoName;
             }
-            else if (_cryptoName == "next")
+            else if (_cryptoName == "->")
             {
+                Navigation.PreviousPageIDs.Add(PageID);
                 int b = Navigation.SpecificCoinPageNextParameters.Count;
                 _cryptoName = Navigation.SpecificCoinPageNextParameters[b - 1];
                 Navigation.SpecificCoinPagePreviousParameters.Add(Navigation.SpecificCoinPageNextParameters[b - 1]);
                 Navigation.SpecificCoinPageNextParameters.RemoveAt(b - 1);
+                _searchBarText = _cryptoName;
             }
             else
             {

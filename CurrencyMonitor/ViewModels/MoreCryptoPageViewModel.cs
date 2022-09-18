@@ -117,12 +117,14 @@ namespace CurrencyMonitor.ViewModels
 
             if (Navigation.PreviousPageIDs[i - 2] == 0)
             {
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 App.Current.Windows[0].Close();
             }
             else if (Navigation.PreviousPageIDs[i - 2] == 1)
             {
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
                 moreCryptoPage.Show();
                 App.Current.Windows[0].Close();
@@ -130,7 +132,7 @@ namespace CurrencyMonitor.ViewModels
             else
             {
                 SaveParameters.Parameter = p.ToString();
-
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -148,7 +150,6 @@ namespace CurrencyMonitor.ViewModels
         private void OnGoNextButtonCommandExecuted(object p)
         {
             int nextPageIDsLength = Navigation.GoNextPageIDs.Count;
-            Navigation.PreviousPageIDs.Add(Navigation.GoNextPageIDs[nextPageIDsLength - 1]);
 
             if (Navigation.GoNextPageIDs[nextPageIDsLength - 1] == 0)
             {

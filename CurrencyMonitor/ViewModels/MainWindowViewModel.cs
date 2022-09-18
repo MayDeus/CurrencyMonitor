@@ -211,27 +211,26 @@ namespace CurrencyMonitor.ViewModels
             Navigation.GoNextPageIDs.Add(PageID);
 
             int i = Navigation.PreviousPageIDs.Count;
+            Navigation.PreviousPageIDs.RemoveAt(i - 1);
 
-            if (Navigation.PreviousPageIDs[i - 1] == 0)
+            if (Navigation.PreviousPageIDs[i - 2] == 0)
             {
-                Navigation.PreviousPageIDs.RemoveAt(i - 1);
-
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 App.Current.Windows[0].Close();
             }
-            else if (Navigation.PreviousPageIDs[i - 1] == 1)
+            else if (Navigation.PreviousPageIDs[i - 2] == 1)
             {
-                Navigation.PreviousPageIDs.RemoveAt(i - 1);
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
                 moreCryptoPage.Show();
                 App.Current.Windows[0].Close();
             }
             else
             {
-                Navigation.PreviousPageIDs.RemoveAt(i - 1);
+                Navigation.PreviousPageIDs.RemoveAt(i - 2);
                 SaveParameters.Parameter = p.ToString();
-
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -249,7 +248,6 @@ namespace CurrencyMonitor.ViewModels
         private void OnGoNextButtonCommandExecuted(object p)
         {
             int nextPageIDsLength = Navigation.GoNextPageIDs.Count;
-            Navigation.PreviousPageIDs.Add(Navigation.GoNextPageIDs[nextPageIDsLength - 1]);
 
             if (Navigation.GoNextPageIDs[nextPageIDsLength - 1] == 0)
             {
@@ -278,13 +276,11 @@ namespace CurrencyMonitor.ViewModels
                 App.Current.Windows[0].Close();
             }
         }
-
-        #endregion
-
         private bool CanGoNextButtonCommandExecute(object p) => true;
 
         #endregion
 
+        #endregion
 
         #region SearchButton
         public ICommand SearchButtonCommand { get; }
@@ -360,7 +356,7 @@ namespace CurrencyMonitor.ViewModels
         {
             _assetsArray = (CryptingUp.ReceiveAssets().Array);
 
-            if (Navigation.PreviousPageIDs.Count > 2)
+            if (Navigation.PreviousPageIDs.Count > 0)
                 GoBackButtonIsEnable = true;
 
             if (Navigation.GoNextPageIDs.Count != 0)
