@@ -146,7 +146,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <DataGrid x:Name="DataGridCoins" Margin="10,167,10,10" ItemsSource="{Binding Path=DataGridAssets}" AutoGenerateColumns="False" FontFamily="Calibri" Background="#FFC4DFE6" BorderBrush="#FF010408" Foreground="Black">
+        <DataGrid IsReadOnly="True" x:Name="DataGridCoins" Margin="10,167,10,10" ItemsSource="{Binding Path=DataGridAssets}" AutoGenerateColumns="False" FontFamily="Calibri" Background="#FFC4DFE6" Foreground="Black" >
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="FontSize" Value="14"/>
@@ -155,6 +155,14 @@
                     <Setter Property="BorderBrush" Value="Black"/>
                 </Style>
             </DataGrid.Resources>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" 
+                                Value="#FFC4DFE6" />
+                    <Setter Property="BorderBrush"
+                                Value="#FFC4DFE6" />
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header=" Asset" Binding="{Binding Path=AssetName}" FontWeight="Bold"/>
                 <DataGridTextColumn Width="*" Header=" Price" Binding="{Binding Path=Price}"/>

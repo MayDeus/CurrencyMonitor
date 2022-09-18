@@ -1,5 +1,6 @@
 ﻿using CurrencyMonitor.Infrastructure.Commands;
 using CurrencyMonitor.Models.Additional;
+using CurrencyMonitor.Models.CryptingUp;
 using CurrencyMonitor.Models.CryptingUp.Assets;
 using CurrencyMonitor.Receivers;
 using CurrencyMonitor.Stores;
