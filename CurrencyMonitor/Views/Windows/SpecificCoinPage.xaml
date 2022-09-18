@@ -22,9 +22,9 @@
         <Button Content="Crypto1" Margin="10 20 370 10" Height="40" Width="40" VerticalAlignment="Top" Command="{Binding Path=SearchButtonCommand}"/>
         <ComboBox HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Width="120"/>
         <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top" Margin="84 0 0 0" Command="{Binding Path=CloseApplicationCommand}"/>
-        <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top"/>
-        <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" Margin="28 0 0 0" VerticalAlignment="Top"/>
-        <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top" Margin="56 0 0 0"/>
+        <Button Content="back" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top" Command="{Binding Path=GoBackButtonCommand}" IsEnabled="{Binding Path=GoBackButtonIsEnable}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+        <Button Content="-" HorizontalAlignment="Left" Height="25" Width="25" Margin="28 0 0 0" VerticalAlignment="Top" Command="{Binding Path=HomeButtonCommand}"/>
+        <Button Content="next" HorizontalAlignment="Left" Height="25" Width="25" VerticalAlignment="Top" Margin="56 0 0 0" Command="{Binding Path=GoNextButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" IsEnabled="{Binding Path=GoNextButtonIsEnable}"/>
         <Grid Margin="40 150 40 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

@@ -16,6 +16,18 @@ namespace CurrencyMonitor.ViewModels
 {
     public class MoreCryptoPageViewModel : ViewModel
     {
+
+        #region PageID
+
+        private short _pageID = 1;
+        public short PageID
+        {
+            get => _pageID;
+            set => Set(ref _pageID, value);
+        }
+
+        #endregion
+
         #region Title
         private string _Title = "CurrencyMonitor";
         public string Title
@@ -55,7 +67,119 @@ namespace CurrencyMonitor.ViewModels
         }
         #endregion
 
+        #region GoBackButtonIsEnable
+
+        private bool _goBackButtonIsEnable = false;
+        public bool GoBackButtonIsEnable
+        {
+            get => _goBackButtonIsEnable;
+            set => Set(ref _goBackButtonIsEnable, value);
+        }
+
+        #endregion
+
+        #region GoNextButtonIsEnable
+
+        private bool _goNextButtonIsEnable = false;
+        public bool GoNextButtonIsEnable
+        {
+            get => _goNextButtonIsEnable;
+            set => Set(ref _goNextButtonIsEnable, value);
+        }
+
+        #endregion
+
         #region Commands
+
+        #region HomeButton
+        public ICommand HomeButtonCommand { get; }
+
+        private void OnHomeButtonCommandExecuted(object p)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            App.Current.Windows[0].Close();
+        }
+
+        private bool CanHomeButtonCommandExecute(object p) => true;
+
+        #endregion
+
+        #region GoBackButton
+        public ICommand GoBackButtonCommand { get; }
+
+        private void OnGoBackButtonCommandExecuted(object p)
+        {
+            Navigation.GoNextPageIDs.Add(PageID);
+
+            int i = Navigation.PreviousPageIDs.Count;
+            Navigation.PreviousPageIDs.RemoveAt(i - 1);
+
+            if (Navigation.PreviousPageIDs[i - 2] == 0)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                App.Current.Windows[0].Close();
+            }
+            else if (Navigation.PreviousPageIDs[i - 2] == 1)
+            {
+                MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
+                moreCryptoPage.Show();
+                App.Current.Windows[0].Close();
+            }
+            else
+            {
+                SaveParameters.Parameter = p.ToString();
+
+                SpecificCoinPage specificCoinPage = new SpecificCoinPage();
+                specificCoinPage.Show();
+                App.Current.Windows[0].Close();
+            }
+
+        }
+        private bool CanGoBackButtonCommandExecute(object p) => true;
+
+        #endregion
+
+        #region GoNextButton
+
+        public ICommand GoNextButtonCommand { get; }
+
+        private void OnGoNextButtonCommandExecuted(object p)
+        {
+            int nextPageIDsLength = Navigation.GoNextPageIDs.Count;
+            Navigation.PreviousPageIDs.Add(Navigation.GoNextPageIDs[nextPageIDsLength - 1]);
+
+            if (Navigation.GoNextPageIDs[nextPageIDsLength - 1] == 0)
+            {
+
+                Navigation.GoNextPageIDs.RemoveAt(nextPageIDsLength - 1);
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                App.Current.Windows[0].Close();
+            }
+            else if (Navigation.GoNextPageIDs[nextPageIDsLength - 1] == 1)
+            {
+                Navigation.GoNextPageIDs.RemoveAt(nextPageIDsLength - 1);
+
+                MoreCryptoPage moreCryptoPage = new MoreCryptoPage();
+                moreCryptoPage.Show();
+                App.Current.Windows[0].Close();
+            }
+            else
+            {
+                Navigation.GoNextPageIDs.RemoveAt(nextPageIDsLength - 1);
+
+                SaveParameters.Parameter = p.ToString();
+                SpecificCoinPage specificCoinPage = new SpecificCoinPage();
+                specificCoinPage.Show();
+                App.Current.Windows[0].Close();
+            }
+        }
+        private bool CanGoNextButtonCommandExecute(object p) => true;
+
+        #endregion
 
         #region SearchButton
         public ICommand SearchButtonCommand { get; }
@@ -102,6 +226,14 @@ namespace CurrencyMonitor.ViewModels
         {
             _assetsArray = (CryptingUp.ReceiveAssets().Array);
 
+            if (Navigation.PreviousPageIDs.Count != 0)
+                GoBackButtonIsEnable = true;
+
+            if (Navigation.GoNextPageIDs.Count != 0)
+                GoNextButtonIsEnable = true;
+
+            Navigation.PreviousPageIDs.Add(PageID);
+
             #region InitializeDataGrid
 
             for (int i = 0; i < _assetsArray.Length; i++)
@@ -125,7 +257,9 @@ namespace CurrencyMonitor.ViewModels
             #endregion
 
             #region Commands
-
+            GoNextButtonCommand = new LambdaCommand(OnGoNextButtonCommandExecuted, CanGoNextButtonCommandExecute);
+            GoBackButtonCommand = new LambdaCommand(OnGoBackButtonCommandExecuted, CanGoBackButtonCommandExecute);
+            HomeButtonCommand = new LambdaCommand(OnHomeButtonCommandExecuted, CanHomeButtonCommandExecute);
             SearchButtonCommand = new LambdaCommand(OnSearchButtonCommandExecuted, CanSearchButtonCommandExecute);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             
