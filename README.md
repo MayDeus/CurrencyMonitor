@@ -1,2 +1,7 @@
 # CurrencyMonitor
-Сryptocurrency exchange rate. The main page displays the top N currencies by popularity on some market.  Page with the ability to view detailed information about the currency: price, volume, price change, in which markets it can be purchased and at what price . Possibility of searching for currency by name or code.
+This application is for getting up-to-date information about cryptocurrencies.
+The main page displays the top 15 currencies to date according to the Binance website.
+There is also the possibility to watch all currencies received using a request from CryptingUp.
+All pages have navigation and the ability to search for a currency by its name.
+There is an opportunity to see more detailed information about a particular currency, its price and where you can buy it.
+Technologies: C#/.Net + WPF (pure) + MVVC
