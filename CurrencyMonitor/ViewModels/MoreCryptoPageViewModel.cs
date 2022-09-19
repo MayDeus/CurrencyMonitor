@@ -131,8 +131,11 @@ namespace CurrencyMonitor.ViewModels
             }
             else
             {
-                SaveParameters.Parameter = p.ToString();
+                int lenght = Navigation.SpecificCoinPagePreviousParameters.Count;
+                Navigation.SpecificCoinPageNextParameters.Add(Navigation.SpecificCoinPagePreviousParameters[lenght - 1]);
                 Navigation.PreviousPageIDs.RemoveAt(i - 2);
+                SaveParameters.Parameter = Navigation.SpecificCoinPagePreviousParameters[lenght - 1];
+                Navigation.SpecificCoinPagePreviousParameters.RemoveAt(lenght - 1);
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -171,8 +174,10 @@ namespace CurrencyMonitor.ViewModels
             else
             {
                 Navigation.GoNextPageIDs.RemoveAt(nextPageIDsLength - 1);
-
-                SaveParameters.Parameter = p.ToString();
+                int length = Navigation.SpecificCoinPageNextParameters.Count;
+                SaveParameters.Parameter = Navigation.SpecificCoinPageNextParameters[length - 1];
+                Navigation.SpecificCoinPageNextParameters.RemoveAt(length - 1);
+                Navigation.SpecificCoinPagePreviousParameters.Add(SaveParameters.Parameter);
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -197,13 +202,14 @@ namespace CurrencyMonitor.ViewModels
                         SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                         specificCoinPage.Show();
                         App.Current.Windows[0].Close();
+                        break;
                     }
+                    else if (_assetsArray.Length - 1 == i)
+                        MessageBox.Show("Could not find the coin named: " + _searchBarText);
                 }
-                MessageBox.Show("Could not find the coin named: " + _searchBarText);
             }
             else
                 MessageBox.Show("Please enter any coin name");
-
         }
 
         private bool CanSearchButtonCommandExecute(object p) => true;

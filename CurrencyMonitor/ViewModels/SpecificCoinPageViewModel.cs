@@ -1,5 +1,6 @@
 ﻿using CurrencyMonitor.Infrastructure.Commands;
 using CurrencyMonitor.Models.Additional;
+using CurrencyMonitor.Models.CryptingUp;
 using CurrencyMonitor.Models.CryptingUp.Assets;
 using CurrencyMonitor.Receivers;
 using CurrencyMonitor.Stores;
@@ -44,6 +45,17 @@ namespace CurrencyMonitor.ViewModels
         {
             get => _assetsArray;
             set => Set(ref _assetsArray, value);
+        }
+
+        #endregion
+
+        #region ExchangesArray
+
+        private Exchange[] _exchangesArray;
+        public Exchange[] ExchangesArray
+        {
+            get => _exchangesArray;
+            set => Set(ref _exchangesArray, value);
         }
 
         #endregion
@@ -134,6 +146,20 @@ namespace CurrencyMonitor.ViewModels
             set => Set(ref _cryptoDescription, value);
         }
 
+        private string _cryptoMarketPlace;
+        public string CryptoMarketPlace
+        {
+            get => _cryptoMarketPlace;
+            set => Set(ref _cryptoMarketPlace, value);
+        }
+
+        private string _cryptoMarketWebSite;
+        public string CryptoMarketWebSite
+        {
+            get => _cryptoMarketWebSite;
+            set => Set(ref _cryptoMarketWebSite, value);
+        }
+
         #endregion
 
         #region InitializeSpecificCoinPageDataMethod
@@ -154,6 +180,8 @@ namespace CurrencyMonitor.ViewModels
                     _cryptoTotalSupply = _assetsArray[i].TotalSupply;
                     _cryptoMaxSupply = _assetsArray[i].MaxSupply;
                     _cryptoDescription = _assetsArray[i].AssetDescription;
+                    _cryptoMarketPlace = _exchangesArray[0].ExchangeName;
+                    _cryptoMarketWebSite = _exchangesArray[0].WebSite;
                 }
             }
         }
@@ -197,6 +225,7 @@ namespace CurrencyMonitor.ViewModels
 
         private void OnHomeButtonCommandExecuted(object p)
         {
+            Navigation.SpecificCoinPagePreviousParameters.Add(CryptoName);
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             App.Current.Windows[0].Close();
@@ -212,10 +241,6 @@ namespace CurrencyMonitor.ViewModels
         private void OnGoBackButtonCommandExecuted(object p)
         {
             Navigation.GoNextPageIDs.Add(PageID);
-            Navigation.SpecificCoinPageNextParameters.Add(_cryptoName);
-
-            int a = Navigation.SpecificCoinPagePreviousParameters.Count;
-            Navigation.SpecificCoinPagePreviousParameters.RemoveAt(a - 1);
 
             int i = Navigation.PreviousPageIDs.Count;
             Navigation.PreviousPageIDs.RemoveAt(i - 1);
@@ -236,8 +261,11 @@ namespace CurrencyMonitor.ViewModels
             }
             else
             {
+                int lenght = Navigation.SpecificCoinPagePreviousParameters.Count;
+                Navigation.SpecificCoinPageNextParameters.Add(Navigation.SpecificCoinPagePreviousParameters[lenght - 1]);
                 Navigation.PreviousPageIDs.RemoveAt(i - 2);
-                SaveParameters.Parameter = p.ToString();
+                SaveParameters.Parameter = Navigation.SpecificCoinPagePreviousParameters[lenght - 1];
+                Navigation.SpecificCoinPagePreviousParameters.RemoveAt(lenght - 1);
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -277,8 +305,10 @@ namespace CurrencyMonitor.ViewModels
             else
             {
                 Navigation.GoNextPageIDs.RemoveAt(nextPageIDsLength - 1);
-
-                SaveParameters.Parameter = p.ToString();
+                int length = Navigation.SpecificCoinPageNextParameters.Count;
+                SaveParameters.Parameter = Navigation.SpecificCoinPageNextParameters[length - 1];
+                Navigation.SpecificCoinPageNextParameters.RemoveAt(length - 1);
+                Navigation.SpecificCoinPagePreviousParameters.Add(SaveParameters.Parameter);
                 SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                 specificCoinPage.Show();
                 App.Current.Windows[0].Close();
@@ -299,17 +329,19 @@ namespace CurrencyMonitor.ViewModels
                 {
                     if (_assetsArray[i].AssetName == _searchBarText)
                     {
+                        Navigation.SpecificCoinPagePreviousParameters.Add(CryptoName);
                         SaveParameters.Parameter = _searchBarText;
                         SpecificCoinPage specificCoinPage = new SpecificCoinPage();
                         specificCoinPage.Show();
                         App.Current.Windows[0].Close();
+                        break;
                     }
+                    else if (_assetsArray.Length - 1 == i)
+                        MessageBox.Show("Could not find the coin named: " + _searchBarText);
                 }
-                MessageBox.Show("Could not find the coin named: " + _searchBarText);
             }
             else
                 MessageBox.Show("Please enter any coin name");
-
         }
 
         private bool CanSearchButtonCommandExecute(object p) => true;
@@ -331,7 +363,8 @@ namespace CurrencyMonitor.ViewModels
 
         public SpecificCoinPageViewModel()
         {
-            _assetsArray = (CryptingUp.ReceiveAssets().Array);
+            _exchangesArray = CryptingUp.ReceiveExchanges().Array;
+            _assetsArray = CryptingUp.ReceiveAssets().Array;
             _cryptoName = SaveParameters.Parameter;
 
             if (Navigation.PreviousPageIDs.Count != 0)
@@ -341,27 +374,7 @@ namespace CurrencyMonitor.ViewModels
             if (Navigation.GoNextPageIDs.Count != 0)
                 GoNextButtonIsEnable = true;
 
-            if (_cryptoName == "<-")
-            {
-                Navigation.PreviousPageIDs.Add(PageID);
-                int i = Navigation.SpecificCoinPagePreviousParameters.Count;
-                _cryptoName = Navigation.SpecificCoinPagePreviousParameters[i - 1];
-                _searchBarText = _cryptoName;
-            }
-            else if (_cryptoName == "->")
-            {
-                Navigation.PreviousPageIDs.Add(PageID);
-                int b = Navigation.SpecificCoinPageNextParameters.Count;
-                _cryptoName = Navigation.SpecificCoinPageNextParameters[b - 1];
-                Navigation.SpecificCoinPagePreviousParameters.Add(Navigation.SpecificCoinPageNextParameters[b - 1]);
-                Navigation.SpecificCoinPageNextParameters.RemoveAt(b - 1);
-                _searchBarText = _cryptoName;
-            }
-            else
-            {
-                Navigation.PreviousPageIDs.Add(PageID);
-                Navigation.SpecificCoinPagePreviousParameters.Add(CryptoName);
-            }
+            Navigation.PreviousPageIDs.Add(PageID);
 
             InitializeSpecificCoinPageData();
 
