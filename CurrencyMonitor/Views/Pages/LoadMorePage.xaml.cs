@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurrencyMonitor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -8,16 +9,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CurrencyMonitor
 {
     /// <summary>
-    /// Логика взаимодействия для SpecificCoinPage.xaml
+    /// Логика взаимодействия для LoadMorePage.xaml
     /// </summary>
-    public partial class SpecificCoinPage : Window
+    public partial class LoadMorePage : Page
     {
-        public SpecificCoinPage()
+        public LoadMorePage()
         {
             InitializeComponent();
         }

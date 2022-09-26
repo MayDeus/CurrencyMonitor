@@ -1,0 +1,325 @@
+﻿<Page x:Class="CurrencyMonitor.Views.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CurrencyMonitor.Views.Pages"
+      xmlns:vm="clr-namespace:CurrencyMonitor.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+    <Page.DataContext>
+        <vm:MainPageVM/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Top Cryptocurrencies by trading volume." Grid.Row="0" Grid.ColumnSpan="5" Foreground="Black" Margin="20" FontWeight="Bold" FontFamily="Calibri" FontSize="18">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="The prices are calculated using the data collected from popular cryptocurrency exchanges." Grid.Row="0" Grid.ColumnSpan="5" Foreground="Black" Margin="20 40 0 0" FontFamily="Calibri" FontSize="18">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="5"/>
+        <Button Content="{Binding Path=AssetsArray[0].AssetName}" Grid.Row="1" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[1].AssetName}" Grid.Row="1" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[2].AssetName}" Grid.Row="1" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[3].AssetName}" Grid.Row="1" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[4].AssetName}" Grid.Row="1" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[5].AssetName}" Grid.Row="2" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[6].AssetName}" Grid.Row="2" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[7].AssetName}" Grid.Row="2" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[8].AssetName}" Grid.Row="2" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[9].AssetName}" Grid.Row="2" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[10].AssetName}" Grid.Row="3" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[11].AssetName}" Grid.Row="3" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[12].AssetName}" Grid.Row="3" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[13].AssetName}" Grid.Row="3" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{Binding Path=AssetsArray[14].AssetName}" Grid.Row="3" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFEAF8FC"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Page>

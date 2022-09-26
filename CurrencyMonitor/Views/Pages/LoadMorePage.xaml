@@ -1,0 +1,33 @@
+﻿<Page x:Class="CurrencyMonitor.LoadMorePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CurrencyMonitor"
+      xmlns:vm="clr-namespace:CurrencyMonitor.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoadMorePage">
+    <Page.DataContext>
+        <vm:LoadMorePageVM/>
+    </Page.DataContext>
+    <Grid>
+        <DataGrid BorderThickness="2" BorderBrush="Black"  Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Path=AssetsArray}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=AssetName}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="*"/>
+                <DataGridTextColumn Header="Volume 24h" Binding="{Binding Path=Volume24h}" Width="*"/>
+                <DataGridTextColumn Header="Change 1h" Binding="{Binding Path=Change1h}" Width="*"/>
+                <DataGridTextColumn Header="Change 24h" Binding="{Binding Path=Change24h}" Width="*"/>
+                <DataGridTextColumn Header="Change 7d" Binding="{Binding Path=Change7d}" Width="*"/>
+                <DataGridTextColumn Header="Total Supply" Binding="{Binding Path=TotalSupply}" Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="Black" Padding="10">
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -1,11 +1,7 @@
-﻿using CurrencyMonitor.Infrastructure.Commands;
-using CurrencyMonitor.Receivers;
-using CurrencyMonitor.ViewModels;
+﻿using CurrencyMonitor.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,14 +14,14 @@ using System.Windows.Shapes;
 
 namespace CurrencyMonitor
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Логика взаимодействия для CryptoSpecificPage.xaml
+    /// </summary>
+    public partial class CryptoSpecificPage : Page
+    {
+        public CryptoSpecificPage()
+        {
+            InitializeComponent();
+        }
     }
 }
