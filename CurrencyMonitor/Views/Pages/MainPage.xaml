@@ -11,6 +11,28 @@
     <Page.DataContext>
         <vm:MainPageVM/>
     </Page.DataContext>
+    <Page.Resources>
+    <Style TargetType="{x:Type Label}" x:Key="sampleLabel">
+            <Setter Property="Control.FontFamily" Value="Calibri"/>
+            <Setter Property="Control.FontSize" Value="20px"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="#FFEAF8FC"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="sampleTextBlock">
+            <Setter Property="Control.FontFamily" Value="Calibri"/>
+            <Setter Property="Control.FontSize" Value="12px"/>
+            <Setter Property="Control.FontWeight" Value="Light"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -35,291 +57,80 @@
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
             </TextBlock.Effect>
         </TextBlock>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="5"/>
-        <Button Content="{Binding Path=AssetsArray[0].AssetName}" Grid.Row="1" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+        <Label Content="{Binding Path=AssetsArray[0].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="0" Grid.Row="1" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[1].AssetName}" Grid.Row="1" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[1].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="1" Grid.Row="1" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[2].AssetName}" Grid.Row="1" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[2].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="2" Grid.Row="1" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[3].AssetName}" Grid.Row="1" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[3].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="3" Grid.Row="1" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[4].AssetName}" Grid.Row="1" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[4].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="4" Grid.Row="1" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[5].AssetName}" Grid.Row="2" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[5].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="0" Grid.Row="2" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[6].AssetName}" Grid.Row="2" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[6].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="1" Grid.Row="2" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[7].AssetName}" Grid.Row="2" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[7].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="2" Grid.Row="2" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[8].AssetName}" Grid.Row="2" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[8].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="3" Grid.Row="2" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[9].AssetName}" Grid.Row="2" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[9].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="4" Grid.Row="2" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[10].AssetName}" Grid.Row="3" Grid.Column="0" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[10].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="0" Grid.Row="3" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[11].AssetName}" Grid.Row="3" Grid.Column="1" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[11].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="1" Grid.Row="3" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[12].AssetName}" Grid.Row="3" Grid.Column="2" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[12].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="2" Grid.Row="3" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[13].AssetName}" Grid.Row="3" Grid.Column="3" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[13].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="3" Grid.Row="3" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="{Binding Path=AssetsArray[14].AssetName}" Grid.Row="3" Grid.Column="4" Margin="15 25 15 25" FontFamily="Calibri" FontSize="16" FontWeight="Bold">
-            <Button.Effect>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Path=AssetsArray[14].AssetName}" Style="{StaticResource sampleLabel}" Grid.Column="4" Grid.Row="3" Margin="15 20 15 20">
+            <Label.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFEAF8FC"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderThickness="0.2" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
+            </Label.Effect>
+        </Label>
     </Grid>
 </Page>

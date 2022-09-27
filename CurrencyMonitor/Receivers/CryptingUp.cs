@@ -5,34 +5,34 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CurrencyMonitor.Receivers
 {
 	public static class CryptingUp
 	{
 		private static readonly Uri ASSETS_URI = new Uri("https://cryptingup.com/api/assets");
-		// https://cryptingup.com/api/assets/<ID>
 		private static readonly Uri EXCHANGES_ALL_URI = new Uri("https://cryptingup.com/api/exchanges");
 		private static readonly Uri EXCHANGES_SPECIFIC_URI = new Uri("https://cryptingup.com/api/exchanges/{0}");
 
-		public static Exchanges ReceiveExchanges()
+		public static async Task<Exchanges> ReceiveExchanges()
 		{
-			WebClient wc = new WebClient();
-			wc.Encoding = Encoding.UTF8;
-
-			string data;
+			HttpClient client = new HttpClient();
+			string data = string.Empty;
 
 			try
 			{
-				data = wc.DownloadString(EXCHANGES_ALL_URI);
+				HttpResponseMessage response = await client.GetAsync(EXCHANGES_ALL_URI).ConfigureAwait(false);
+				data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 			}
-			catch (WebException)
+			catch
 			{
 				// in case request has gone wrong
 				return null;
 			}
-			
+
 			var result = ParseExchanges(data);
 			return result;
 		}
@@ -42,18 +42,17 @@ namespace CurrencyMonitor.Receivers
 			return JsonConvert.DeserializeObject<Exchanges>(jsonString);
 		}
 
-		public static Assets ReceiveAssets()
+		public static async Task<Assets> ReceiveAssets()
 		{
-			WebClient wc = new WebClient();
-			wc.Encoding = Encoding.UTF8;
-
-			string data;
+			HttpClient client = new HttpClient();
+			string data = string.Empty;
 
 			try
 			{
-				data = wc.DownloadString(ASSETS_URI);
+				HttpResponseMessage response = await client.GetAsync(ASSETS_URI).ConfigureAwait(false);
+				data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 			}
-			catch (WebException)
+			catch
 			{
 				// in case request has gone wrong
 				return null;

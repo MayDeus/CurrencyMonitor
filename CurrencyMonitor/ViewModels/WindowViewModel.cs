@@ -6,6 +6,7 @@ using CurrencyMonitor.Receivers;
 using CurrencyMonitor.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,6 @@ namespace CurrencyMonitor.ViewModels
         private Page LoadMorePage;
         private Page CryptoSpecificPage;
 
-        #region AssetsArray
 
         private Asset[] _assetsArray;
         public Asset[] AssetsArray
@@ -28,9 +28,7 @@ namespace CurrencyMonitor.ViewModels
             get => _assetsArray;
             set => Set(ref _assetsArray, value);
         }
-        #endregion
 
-        #region CurrentPage
 
         private Page _currentPage;
         public Page CurrentPage
@@ -38,9 +36,7 @@ namespace CurrencyMonitor.ViewModels
             get => _currentPage;
             set => Set(ref _currentPage, value);
         }
-        #endregion
 
-        #region SearchBarText
 
         private string _searchBarText;
         public string SearchBarText
@@ -48,11 +44,8 @@ namespace CurrencyMonitor.ViewModels
             get => _searchBarText;
             set => Set(ref _searchBarText, value);
         }
-        #endregion
 
         #region Commands
-
-        #region LoadMorePageBtn
 
         public ICommand LoadMorePageBtnCommand { get; }
 
@@ -62,9 +55,6 @@ namespace CurrencyMonitor.ViewModels
         }
         private bool CanLoadMorePageBtnCommandExecute(object p) => true;
 
-        #endregion
-
-        #region MainPageBtn
 
         public ICommand MainPageBtnCommand { get; }
 
@@ -74,9 +64,6 @@ namespace CurrencyMonitor.ViewModels
         }
         private bool CanMainPageBtnCommandExecute(object p) => true;
 
-        #endregion
-
-        #region CryptoSpecificPageBtn
 
         public ICommand CryptoSpecificPageBtnCommand { get; }
 
@@ -86,44 +73,39 @@ namespace CurrencyMonitor.ViewModels
         }
         private bool CanCryptoSpecificPageBtnCommandExecute(object p) => true;
 
-        #endregion
-
-        #region SearchBtnClick
 
         public ICommand SearchBtnClickCommand { get; }
 
         private void OnSearchBtnClickCommandExecuted(object p)
         {
-            if (String.IsNullOrEmpty(SearchBarText))
+            if (string.IsNullOrEmpty(SearchBarText))
                 MessageBox.Show("Please enter any coin name");
             else if (SearchBarText == SaveParameters.Parameter)
                 CurrentPage = CryptoSpecificPage;
             else
             {
-                foreach (var item in AssetsArray)
+                var asset = AssetsArray.FirstOrDefault(a => a.AssetName == SearchBarText);
+
+                if (asset == null)
                 {
-                    if (item.AssetName == SearchBarText)
-                    {
-                        SaveParameters.Parameter = item.AssetName;
-                        CryptoSpecificPage = new CryptoSpecificPage();
-                        CurrentPage = CryptoSpecificPage;
-                        break;
-                    }
-                    else if (item == AssetsArray[AssetsArray.Length - 1])
-                        MessageBox.Show("Couldn't find a coin named: " + SearchBarText);
+                    MessageBox.Show("Couldn't find a coin named: " + SearchBarText);
+                    return;
                 }
+
+                SaveParameters.Parameter = asset.AssetName;
+                CryptoSpecificPage = new CryptoSpecificPage();
+                CurrentPage = CryptoSpecificPage;
             }
         }
-        private bool CanSearchBtnClickCommandExecute(object p) => true;
 
-        #endregion
+        private bool CanSearchBtnClickCommandExecute(object p) => true;
 
 
         #endregion
 
         public WindowViewModel()
         {
-            AssetsArray = CryptingUp.ReceiveAssets().Array;
+            AssetsArray = CryptingUp.ReceiveAssets().Result.Array;
 
             MainPage = new Views.Pages.MainPage();
             LoadMorePage = new LoadMorePage();

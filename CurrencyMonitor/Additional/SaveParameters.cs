@@ -6,8 +6,7 @@ namespace CurrencyMonitor.Models.Additional
 {
     public static class SaveParameters
     {
-        public static string Parameter
-            { get; set; }
+        public static string Parameter { get; set; }
 
     }
 }

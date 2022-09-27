@@ -16,24 +16,16 @@ namespace CurrencyMonitor.ViewModels
     public class MainPageVM : ViewModel
     {
 
-        #region AssetsArray
-
         private Asset[] _assetsArray;
         public Asset[] AssetsArray
         {
             get => _assetsArray;
             set => Set(ref _assetsArray, value);
         }
-        #endregion
-
-        #region Commands
-
-
-        #endregion
 
         public MainPageVM()
         {
-            AssetsArray = CryptingUp.ReceiveAssets().Array;
+            AssetsArray = CryptingUp.ReceiveAssets().Result.Array;
         }
     }
 }
